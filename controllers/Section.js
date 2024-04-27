@@ -1,13 +1,13 @@
 const Section = require("../models/Section");
 const Course = require("../models/Course");
 const SubSection = require("../models/SubSection");
-
+// CREATE a new section
 exports.createSection = async (req, res) => {
 	try {
-		
+		// Extract the required properties from the request body
 		const { sectionName, courseId } = req.body;
 
-		
+		// Validate the input
 		if (!sectionName || !courseId) {
 			return res.status(400).json({
 				success: false,
@@ -56,12 +56,6 @@ exports.createSection = async (req, res) => {
 exports.updateSection = async (req, res) => {
 	try {
 		const { sectionName, sectionId,courseId } = req.body;
-        if (!sectionName || !courseId) {
-			return res.status(400).json({
-				success: false,
-				message: "Missing required properties",
-			});
-		}
 		const section = await Section.findByIdAndUpdate(
 			sectionId,
 			{ sectionName },
